@@ -26,7 +26,7 @@ const DUMMY_PROJECTS = [
 
 function App() {
   return (
-    <main>
+    <main className="h-screen my-8">
       <Sidebar projects={DUMMY_PROJECTS} />
     </main>
   );
