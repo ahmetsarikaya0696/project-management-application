@@ -43,11 +43,12 @@ function App() {
     setProjectState((prevState) => {
       return {
         ...prevState,
+        selectedProjectId: undefined,
         projects: [...prevState.projects, newProject],
       };
     });
 
-    
+
   };
 
   return (
