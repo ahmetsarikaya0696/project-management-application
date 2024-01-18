@@ -1,5 +1,7 @@
-export const SelectedProject = ({ project }) => {
-  const { title, description, date, tasks } = project;
+export const SelectedProject = ({ project, onDelete }) => {
+  console.log(project);
+
+  const { title, description, date, id } = project;
   const formattedDate = new Date(date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
@@ -10,7 +12,10 @@ export const SelectedProject = ({ project }) => {
       <header className="pb-4 mb-4 border-b-2 border-stone-300">
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-stone-300">{title}</h1>
-          <button className="text-stone-600 hover:text-stone-950">
+          <button
+            className="text-stone-600 hover:text-stone-950"
+            onClick={() => onDelete(id)}
+          >
             Delete
           </button>
         </div>
