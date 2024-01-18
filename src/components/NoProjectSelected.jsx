@@ -1,7 +1,7 @@
 import noProjecstImage from "../assets/no-projects.png";
 import { Button } from "./Button";
 
-export const NoProjectSelected = () => {
+export const NoProjectSelected = ({ onStartCreateProject }) => {
   return (
     <div className="mt-2 text-center w-2/3">
       <img
@@ -16,7 +16,7 @@ export const NoProjectSelected = () => {
         Select a project or get started with new one
       </p>
       <p className="mt-8">
-        <Button>Create New Project</Button>
+        <Button onClick={onStartCreateProject}>Create New Project</Button>
       </p>
     </div>
   );
