@@ -16,29 +16,51 @@ function App() {
 
   const { selectedProjectId, projects } = projectState;
 
-  function handleStartCreateProject() {
+  const handleStartCreateProject = () => {
     setProjectState((prevState) => {
       return {
         ...prevState,
         selectedProjectId: null,
       };
     });
-  }
+  };
 
-  function handleBackToNeutralState() {
+  const handleBackToNeutralState = () => {
     setProjectState((prevState) => {
       return {
         ...prevState,
         selectedProjectId: undefined,
       };
     });
-  }
+  };
+
+  const handleSaveProject = (newProject) => {
+    newProject = {
+      ...newProject,
+      id: Math.random().toString(),
+    };
+
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        projects: [...prevState.projects, newProject],
+      };
+    });
+
+    
+  };
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <Sidebar onStartCreateProject={handleStartCreateProject} projects={projects} />
+      <Sidebar
+        onStartCreateProject={handleStartCreateProject}
+        projects={projects}
+      />
       {selectedProjectId === null && (
-        <NewProject onBackToNeutralState={handleBackToNeutralState} />
+        <NewProject
+          onSaveProject={handleSaveProject}
+          onBackToNeutralState={handleBackToNeutralState}
+        />
       )}
       {selectedProjectId === undefined && (
         <NoProjectSelected onStartCreateProject={handleStartCreateProject} />
