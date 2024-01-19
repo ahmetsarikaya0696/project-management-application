@@ -1,7 +1,7 @@
-export const SelectedProject = ({ project, onDelete }) => {
-  console.log(project);
+import { Tasks } from "./Tasks";
 
-  const { title, description, date, id } = project;
+export const SelectedProject = ({ project, onDelete, onAddTask, onDeleteTask }) => {
+  const { title, description, date, id, tasks } = project;
   const formattedDate = new Date(date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
@@ -22,7 +22,7 @@ export const SelectedProject = ({ project, onDelete }) => {
         <p className="mb-4 text-stone-400">{formattedDate}</p>
         <p className="text-stone-600 whitespace-pre-wrap">{description}</p>
       </header>
-      TASKS
+      <Tasks tasks={tasks} onAddTask={onAddTask} onDeleteTask={onDeleteTask} />
     </div>
   );
 };

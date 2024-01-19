@@ -43,6 +43,7 @@ function App() {
     newProject = {
       ...newProject,
       id: Math.random().toString(),
+      tasks: [],
     };
 
     setProjectState((prevState) => {
@@ -73,6 +74,39 @@ function App() {
     });
   };
 
+  const handleAddTask = (task) => {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        projects: prevState.projects.map((project) => {
+          if (project.id === selectedProjectId) {
+            return {
+              ...project,
+              tasks: [...project.tasks, task],
+            };
+          }
+          return project;
+        }),
+      };
+    });
+  };
+
+  const handleDeleteTask = (taskId) => {
+    setProjectState((prevState) => {
+      return {
+        ...prevState,
+        projects: prevState.projects.map((project) => {
+          if (project.id === selectedProjectId) {
+            return {
+              ...project,
+              tasks: project.tasks.filter((task) => task.id !== taskId),
+            };
+          }
+        }),
+      };
+    });
+  };
+
   return (
     <main className="h-screen my-8 flex gap-8">
       <Sidebar
@@ -91,7 +125,12 @@ function App() {
         <NoProjectSelected onStartCreateProject={handleStartCreateProject} />
       )}
       {selectedProjectId !== undefined && selectedProjectId !== null && (
-        <SelectedProject project={selectedProject} onDelete={handleDeleteProject} />
+        <SelectedProject
+          project={selectedProject}
+          onDelete={handleDeleteProject}
+          onAddTask={handleAddTask}
+          onDeleteTask={handleDeleteTask}
+        />
       )}
     </main>
   );
